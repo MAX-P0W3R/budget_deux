@@ -1,16 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import '../screens/needs_screen.dart';
+import '../screens/wants_screen.dart';
+import '../screens/investing_screen.dart';
 
-// BudgetPieChart is a reusable widget that handles the visualization of the budget data
 class BudgetPieChart extends StatelessWidget {
   final double salary;
 
   const BudgetPieChart({
-    super.key,
+    Key? key,
     required this.salary,
-  });
+  }) : super(key: key);
 
-  // Calculate the sections for the pie chart based on the 50/30/20 rule
+  void _onPieChartSectionPressed(int index, BuildContext context) {
+    final monthly = salary / 12;
+    switch (index) {
+      case 0:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => NeedsScreen(monthlyAmount: monthly * 0.5)),
+        );
+        break;
+      case 1:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => WantsScreen(monthlyAmount: monthly * 0.3)),
+        );
+        break;
+      case 2:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  InvestingScreen(monthlyAmount: monthly * 0.2)),
+        );
+        break;
+    }
+  }
+
   List<PieChartSectionData> _getSections() {
     final monthly = salary / 12;
     return [
@@ -19,18 +48,21 @@ class BudgetPieChart extends StatelessWidget {
         title: 'Needs\n${(monthly * 0.5).toStringAsFixed(2)}',
         color: Colors.blue,
         radius: 100,
+        titleStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
       ),
       PieChartSectionData(
         value: monthly * 0.3,
         title: 'Wants\n${(monthly * 0.3).toStringAsFixed(2)}',
         color: Colors.green,
         radius: 100,
+        titleStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
       ),
       PieChartSectionData(
         value: monthly * 0.2,
         title: 'Investing\n${(monthly * 0.2).toStringAsFixed(2)}',
         color: Colors.amber,
         radius: 100,
+        titleStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
       ),
     ];
   }
@@ -70,6 +102,16 @@ class BudgetPieChart extends StatelessWidget {
               sections: _getSections(),
               sectionsSpace: 0,
               centerSpaceRadius: 40,
+              pieTouchData: PieTouchData(
+                touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                  if (event is FlTapUpEvent &&
+                      pieTouchResponse?.touchedSection != null) {
+                    final sectionIndex =
+                        pieTouchResponse!.touchedSection!.touchedSectionIndex;
+                    _onPieChartSectionPressed(sectionIndex, context);
+                  }
+                },
+              ),
             ),
           ),
         ),
