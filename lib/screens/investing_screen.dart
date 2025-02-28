@@ -5,9 +5,9 @@ class InvestingScreen extends StatefulWidget {
   final double monthlyAmount;
 
   const InvestingScreen({
-    Key? key,
+    super.key,
     required this.monthlyAmount,
-  }) : super(key: key);
+  });
 
   @override
   _InvestingScreenState createState() => _InvestingScreenState();

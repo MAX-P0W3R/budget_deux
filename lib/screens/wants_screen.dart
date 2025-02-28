@@ -5,9 +5,9 @@ class WantsScreen extends StatefulWidget {
   final double monthlyAmount;
 
   const WantsScreen({
-    Key? key,
+    super.key,
     required this.monthlyAmount,
-  }) : super(key: key);
+  });
 
   @override
   _WantsScreenState createState() => _WantsScreenState();

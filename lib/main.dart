@@ -11,6 +11,8 @@ void main() => runApp(
     );
 
 class BudgetCalculatorApp extends StatelessWidget {
+  const BudgetCalculatorApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(

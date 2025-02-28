@@ -4,13 +4,15 @@ import '../widgets/budget_pie_chart.dart';
 import '../providers/theme_provider.dart';
 
 class BudgetCalculator extends StatefulWidget {
+  const BudgetCalculator({super.key});
+
   @override
   _BudgetCalculatorState createState() => _BudgetCalculatorState();
 }
 
 class _BudgetCalculatorState extends State<BudgetCalculator> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _salaryController = TextEditingController();
+  final TextEditingController _salaryController = TextEditingController();
   bool _showChart = false;
   double _salary = 0;
 

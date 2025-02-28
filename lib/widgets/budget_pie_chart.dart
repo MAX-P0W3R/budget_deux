@@ -8,9 +8,9 @@ class BudgetPieChart extends StatelessWidget {
   final double salary;
 
   const BudgetPieChart({
-    Key? key,
+    super.key,
     required this.salary,
-  }) : super(key: key);
+  });
 
   void _onPieChartSectionPressed(int index, BuildContext context) {
     final monthly = salary / 12;

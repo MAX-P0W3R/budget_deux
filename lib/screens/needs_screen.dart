@@ -5,9 +5,9 @@ class NeedsScreen extends StatefulWidget {
   final double monthlyAmount;
 
   const NeedsScreen({
-    Key? key,
+    super.key,
     required this.monthlyAmount,
-  }) : super(key: key);
+  });
 
   @override
   _NeedsScreenState createState() => _NeedsScreenState();
@@ -27,8 +27,7 @@ class _NeedsScreenState extends State<NeedsScreen> {
       'Utilities': 0,
       'Car Payment': 0,
       'Health Insurance': 0,
-      'Child Care': 0,
-      'Children Education': 0,
+      'Kids Daycare': 0,
     };
 
     // Initialize controllers for each category
